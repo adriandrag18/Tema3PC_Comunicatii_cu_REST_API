@@ -1,0 +1,39 @@
+Draghicescu Adrian
+321CB
+
+                                Tema 3 PC
+
+    Am folosit scheletul de la laboratorul 10, nu am lucrat decat in fisierele
+client.c si request.c.
+
+    Am ales sa folosesc bibleoteca parson datorita recomandarii din enuntul
+temei.
+
+    Pentru comenziile get_book si get_books am preluat content-ul din raspunsul
+serverului, l-am pus intr-un obiect JSON si am afisat stringul obtinut cu
+functia.
+
+    Pentru celelatle comenzi (pentru care serverul intoarce un mesaj cu
+Content-len: 0) nu este afisat nimic in caz de succes.
+
+    Am acoperti cazurile in care serverul intoarce eroare si o printeaza la
+stdin. Pentru cererile POST am coperit si raspunsul serverului "Too many
+requests, please try again later".
+
+    Parsarea inputurilor este foarte simpla, se verifica validitatea doar la
+numere (id, page_count) si si se printeaza un mesaj in cazurile in care o
+valoare numerica este invalida si in care nu este recunoscuta comanda.
+
+    Programul client nu verifica daca comenzile sunt date intr-o ordine logica
+(login inainte de enter_library sau enter_library inainte de get_books). Daca
+se fac operatii in altfel de oridine loginCookie respectiv token vor fi NULL
+si se va trimite la sever o cerere fara campurile "Set-cookie: " respectiv
+"Authorization: Bearer ", caz in care serverul va intoarce o eroare care va fi
+afisata.
+
+    Am ales sa deschid si sa inchid conexiunea cu serverul dupa fiecare mesaj,
+deoarece m-am gandit ca inputurile date manual sunt destul de distantate in
+timp si nu are rost sa se mentina o conexiune deschisa tot timpul.
+
+    Am incercat sa mention o limita de 80 caractere per linie pentru fisierele
+scrise de mine.
